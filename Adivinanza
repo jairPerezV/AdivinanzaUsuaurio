@@ -1,0 +1,37 @@
+<?php
+$respuestaCorrecta = "el huevo";
+$mensaje = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $respuestaUsuario = strtolower(trim($_POST["respuesta"]));
+
+    if ($respuestaUsuario == strtolower($respuestaCorrecta)) {
+        $mensaje = "¡Correcto! 🎉";
+    } else {
+        $mensaje = "Incorrecto 😢. La respuesta era: $respuestaCorrecta.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Adivinanza en PHP</title>
+</head>
+<body>
+    <h2>Adivinanza:</h2>
+    <p>Tengo cáscara, no soy nuez, tengo yema, pero no soy sol. ¿Qué soy?</p>
+
+    <form method="post" action="">
+        <label for="respuesta">Tu respuesta:</label><br>
+        <input type="text" id="respuesta" name="respuesta" required>
+        <br><br>
+        <input type="submit" value="Comprobar">
+    </form>
+
+    <?php if ($mensaje): ?>
+        <h3><?php echo $mensaje; ?></h3>
+    <?php endif; ?>
+</body>
+</html>
